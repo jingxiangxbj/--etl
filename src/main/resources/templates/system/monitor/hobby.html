@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-block">
+        <div style="padding:10px;clear: both;">
+            <div id="psLine" style="height:600px;"></div>
+        </div>
+        <script src="js/echarts.js"></script>
+    </div>
+</div>
+<script>
+
+
+    //图表
+    var echarts = echarts.init(document.getElementById('psLine'));
+    initEcharts();
+
+    function initEcharts(){
+    echarts.clear();
+    echarts.showLoading({text: '正在努力的读取数据中...'});
+    $.ajax({
+    url:"/hobby/countHobby",
+    type:"get",
+    success:function(data){
+    if (data.code === 0) {
+    echarts.setOption(data.msg, true);
+    echarts.hideLoading();
+    } else {
+    alert('提示', data.msg);
+    }
+    }
+
+    })
+
+    }
+
+
+
+
+</script>
+

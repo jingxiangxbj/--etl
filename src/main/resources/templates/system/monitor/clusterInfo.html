@@ -1,0 +1,45 @@
+<style>
+    .default_avatars_list {
+    display: inline-block;
+    }
+
+    .default_avatars_list img {
+    width: 12.3%;
+    display: inline;
+    margin: 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    }
+</style>
+<div class="card profile" style="padding: 1.2rem">
+    <div class="actions" style="margin-right: 1rem">
+    </div>
+    <div class="profile__info">
+        <ul class="icon-list">
+            <li><i>集群名称：     </i> [[${custerInfo.clusterName}]] </li>
+            <li><i>节点数量：     </i> [[${custerInfo.nodesCount}]]</li>
+            <li><i>索引数据：     </i> [[${custerInfo.indicesCount}]] </li>
+            <li><i>集群状态：     </i> [[${custerInfo.clusterStatus}]] </li>
+            <li><i>系统使用内存：  </i> [[${custerInfo.osmemUsed}]] </li>
+            <li><i>系统总内存：    </i> [[${custerInfo.osmemTotal}]] </li>
+            <li><i>系统未用内存：  </i> [[${custerInfo.osmemFree}]] </li>
+            <li><i>系统未用百分比：</i> [[${custerInfo.osmemFreePercent}]] </li>
+            <li><i>系统已用百分比：</i> [[${custerInfo.osmemUsedPercent}]] </li>
+            <li><i>es内存使用：   </i> [[${custerInfo.esmemUsed}]] </li>
+            <li><i>es总内存：     </i> [[${custerInfo.esmemTotal}]] </li>
+            <li><i>cpu使用百分比： </i> [[${custerInfo.cpuPercent}]] </li>
+            <li><i>数据数量：      </i> [[${custerInfo.docsCount}]] </li>
+
+        </ul>
+    </div>
+</div>
+
+</div>
+<script >
+    function refreshUserProfile() {
+    $.post("/elasticsearch/clusterInfo", function (r) {
+    $main_content.html("").append(r);
+    });
+    }
+
+</script>

@@ -1,0 +1,82 @@
+<div class="card">
+    <div class="card-block">
+        <!--<span class="actions__item zmdi zmdi-search"  onclick="search()" title="搜索" />-->
+        <!--<span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />-->
+    <div style="padding:10px;clear: both;">
+        <!--<div id="data-table_filter" class="dataTables_filter">-->
+            <!--<form class="user-table-form">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-sm-3">-->
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon"> 阶段： </span>-->
+                            <!--<div class="form-group">-->
+                                <!--<select class="form-control" name="stage">-->
+                                    <!--<option value="transform">转换</option>-->
+                                    <!--<option value="extract">抽取</option>-->
+                                    <!--<option value="load">存储</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-3">-->
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon"> 状态： </span>-->
+                            <!--<div class="form-group">-->
+                                <!--<select class="form-control" name="status">-->
+                                    <!--<option value="ALL">所有</option>-->
+                                    <!--<option value="SUCCESS">成功</option>-->
+                                    <!--<option value="FAIL">失败</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+        <div id="psLine" style="height:600px;"></div>
+    </div>
+    <script src="js/echarts.js"></script>
+    </div>
+</div>
+    <script>
+        var $userTableForm = $(".user-table-form");
+
+        //图表
+        var echarts = echarts.init(document.getElementById('psLine'));
+       <!--var status = $userTableForm.find("select[name='status']").val();-->
+        <!--var stage = $userTableForm.find("select[name='stage']").val();-->
+        initEcharts();
+        function initEcharts(){
+        echarts.clear();
+        echarts.showLoading({text: '正在努力的读取数据中...'});
+        $.ajax({
+        <!--url:"/etlInfo/barchar?stage="+stage+"&status="+status,-->
+         url:"/etlInfo/barchar",
+        type:"post",
+        <!--contentType: "application/json;charset=utf-8",-->
+        <!--dataType : "json",-->
+        <!--data : JSON.stringify({'stage':stage,'status':status}),-->
+        success:function(result){
+        if (result.code === 0) {
+        echarts.setOption(result.msg, true);
+        echarts.hideLoading();
+        } else {
+        alert('提示', result.msg);
+        }
+        }
+
+        })
+
+        }
+
+        function search() {
+        initEcharts();
+        }
+        function refresh() {
+        $(".user-table-form")[0].reset();
+        search();
+        }
+
+
+    </script>
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jingxiang.datachange.mapper.EmailMapper">
+  <resultMap id="BaseResultMap" type="com.jingxiang.datachange.entity.Email">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="toEmail" jdbcType="VARCHAR" property="toemail" />
+    <result column="fromEmail" jdbcType="VARCHAR" property="fromemail" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+</mapper>

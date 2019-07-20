@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jingxiang.datachange.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.jingxiang.datachange.entity.Menu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="menu_id" jdbcType="BIGINT" property="menuId" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="order_num" jdbcType="BIGINT" property="orderNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+  </resultMap>
+  <select id="findUserPermissions" resultMap="BaseResultMap">
+  	select m.perms from t_role r
+        left join t_user_role ur on(r.role_id = ur.role_id)
+        left join t_user u on(u.user_id = ur.user_id)
+        left join t_role_menu rm on(rm.role_id = r.role_id)
+        left join t_menu m on(m.menu_id = rm.menu_id )
+        where u.username = #{userName} and m.perms is not null and m.perms &lt;&gt; ''
+  </select>
+
+  <select id="findUserMenus" resultMap="BaseResultMap">
+  	select m.* from t_menu m
+    where m.type &lt;&gt; 1 and m.menu_id in
+        (select distinct rm.menu_id from t_role_menu rm
+		left join t_role r on(rm.role_id = r.role_id)
+        left join t_user_role ur on(ur.role_id = r.role_id)
+        left join t_user u on (u.user_id = ur.user_id)
+        where u.username = #{userName}) order by m.create_time
+  </select>
+
+  <update id="changeToTop" parameterType="java.util.List">
+    update t_menu set parent_id = 0 where menu_id in ( select a.menu_id from (
+    (select menu_id from t_menu where parent_id in
+    <foreach collection="list" item="menuId" index="index" open="(" close=")" separator=",">
+      #{menuId}
+    </foreach>
+    ) ) a )
+  </update>
+    <!--<resultMap id="menuResultMap"-->
+               <!--type="com.jingxiang.datachange.entity.MenuExt">-->
+        <!--<id column="id" property="id" />-->
+        <!--<result column="name" property="name" />-->
+        <!--<result column="description" property="description" />-->
+
+        <!--<collection column="id" property="questions" javaType="ArrayList"-->
+                    <!--ofType="com.briup.apps.poll.bean.extend.QuestionVM"-->
+                    <!--select="com.briup.apps.poll.dao.extend.QuestionVMMapper.slectAllQuestion">-->
+        <!--</collection>-->
+    <!--</resultMap>-->
+</mapper>

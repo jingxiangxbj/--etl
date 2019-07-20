@@ -1,0 +1,40 @@
+<div class="card" xmlns:shiro="http://www.w3.org/1999/xhtml">
+    <div data-th-include="system/user/userAdd"></div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <div class="dataTables_buttons hidden-sm-down actions">
+                    <span class="actions__item zmdi zmdi-search"  onclick="search()" title="搜索" />
+                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
+                </div>
+            </div>
+            <div id="data-table_filter" class="dataTables_filter">
+                <form class="user-table-form">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 阶段： </span>
+                                <div class="form-group">
+                                    <input type="text" name="stage" class="form-control"/> <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 状态： </span>
+                                <div class="form-group">
+                                    <input type="text" name="status" class="form-control"/> <i class="form-group__bar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <table id="userTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+        </div>
+    </div>
+</div>
+        </div>
+<script data-th-src="@{js/app/system/monitor/etlInfo.js}"></script>
