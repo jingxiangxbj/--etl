@@ -82,7 +82,22 @@ mapper:
   not-empty: false
   identity: MYSQL
 server:
-  port: 8080
+  port: 7000
   tomcat:
     uri-encoding: utf-8
-
+oauth:
+  qq:
+    #你的appid
+    client_id: 123456
+    #你的appkey
+    client_secret: aaaaaaaaaaaa
+    #你接收响应code码地址,回调地址
+    redirect_uri: http://localhost:7000/authorize/qq
+    #腾讯获取code码地址
+    code_callback_uri: https://graph.qq.com/oauth2.0/authorize
+    #腾讯获取access_token地址
+    access_token_callback_uri: https://graph.qq.com/oauth2.0/token
+    #腾讯获取openid地址
+    openid_callback_uri: https://graph.qq.com/oauth2.0/me
+    #腾讯获取用户信息地址
+    user_info_callback_uri: https://graph.qq.com/user/get_user_info

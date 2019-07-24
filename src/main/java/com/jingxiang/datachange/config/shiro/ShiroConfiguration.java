@@ -77,6 +77,13 @@ private String database;
         shiroFilterFactoryBean.setSuccessUrl(successUrl);
         // 未授权 url
         shiroFilterFactoryBean.setUnauthorizedUrl(unauthorizedUrl);
+        //        split()方法： 分割字符串过程中会自动忽略所有的空项；
+//
+//        splitByWholeSeparator方法：分割字符串过程中会忽略中间的空项，保留末尾的空项；
+//
+//        splitByWholeSeparatorPreserveAllToKens方法及splitPreserveAllToKens方法作用相同：分割字符串过程中会按照每个分隔符进行分割，不忽略任何空白项；
+//
+//        splitByCharacterType方法及splitByCharacterTypeCamelCase方法：按照字符类型进行分割。
         // 设置免认证 url
         String[] anonUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(anonUrl, ",");
         for (String url : anonUrls) {

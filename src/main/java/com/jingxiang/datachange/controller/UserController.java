@@ -110,7 +110,7 @@ log.error("新增用户失败",e);
     @RequestMapping("user/update")
     @Log("修改用户")
     @ResponseBody
-    public ResponseBo updateUser(User   user, Long[] rolesSelect) {
+    public ResponseBo updateUser(User user, Long[] rolesSelect) {
         try {
             if (ON.equalsIgnoreCase(user.getStatus()))
                 user.setStatus(User.STATUS_VALID);
