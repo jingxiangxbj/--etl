@@ -292,7 +292,11 @@
             <artifactId>shiro-redis</artifactId>
             <version>3.2.3</version>
         </dependency>
-
+        <!-- 整合activemq -->
+        <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
